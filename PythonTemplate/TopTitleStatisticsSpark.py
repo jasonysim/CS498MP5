@@ -12,8 +12,11 @@ N = 5
 log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
 
-lines = lines.map(lambda line : int(line.split('\t')[1]))
-ans2  = lines.sum() 
+ans1 = lines.map(lambda line : int(line.split('\t')[1])).sum()//N
+ans2 = lines.map(lambda line : int(line.split('\t')[1])).sum()
+ans3 = lines.map(lambda line : int(line.split('\t')[1])).min()
+ans4 = lines.map(lambda line : int(line.split('\t')[1])).max()
+ 
 
 LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
@@ -36,10 +39,10 @@ outputFile.write('Min\t%s\n' % ans3)
 outputFile.write('Max\t%s\n' % ans4)
 outputFile.write('Var\t%s\n' % ans5)
 '''
-# outputFile.write('Mean\t%s\n' % ans1)
+outputFile.write('Mean\t%s\n' % ans1)
 outputFile.write('Sum\t%s\n' % ans2)
-# outputFile.write('Min\t%s\n' % ans3)
-# outputFile.write('Max\t%s\n' % ans4)
+outputFile.write('Min\t%s\n' % ans3)
+outputFile.write('Max\t%s\n' % ans4)
 # outputFile.write('Var\t%s\n' % ans5)
 
 sc.stop()
