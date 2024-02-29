@@ -41,12 +41,15 @@ lines = lines.map(lambda x: (x, 1))
 lines = lines.reduceByKey(lambda x, y: x + y)
 # sort values ascending
 lines = lines.sortBy(lambda x: x[1], ascending=False)
-outputFile = open(sys.argv[4],"w")
+top_lines = lines.take(10)
+# sort by key in ascending order
 
+sorted_top_lines = top_lines.sortBy(lambda x: x[0], ascending=True)
+outputFile = open(sys.argv[4],"w")
 #TODO1
 #write results to output file. Format for each line: (line +"\n")
 
-for line in lines.take(10):
+for line in sorted_top_lines.take(10):
     outputFile.write(f'{line[0]}\t{line[1]}\n')
 
 sc.stop()
