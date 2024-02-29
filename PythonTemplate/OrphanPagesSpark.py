@@ -21,7 +21,7 @@ def id_counter(line):
     return results
 
 lines = lines.map(id_counter)
-lines = lines.reduceByKey(lambda x, y : x+y)
+lines = lines.reduceByKey(lambda x, y : x[1]+y[1])
 
 LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 output = open(sys.argv[2], "w")
