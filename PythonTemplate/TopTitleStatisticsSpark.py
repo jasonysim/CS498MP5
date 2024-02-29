@@ -11,11 +11,8 @@ lines = sc.textFile(sys.argv[1], 1)
 N = 5
 log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
-def parse_line(line):
-    title, count = line.split('\t')
-    return (title, int(count))
 
-lines = lines.flatMap(parse_line)
+# lines = lines.flatMap(parse_line)
 
 LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
