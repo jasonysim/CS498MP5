@@ -20,7 +20,7 @@ with open(delimitersPath) as f:
     delimiters = list(delimiters)
 
 def tokenize_words(line):
-    words = line.lower().encode("utf-8")
+    words = line.lower()
     for delimiter in delimiters:
         words = ' '.join(words.split(delimiter))
     words = [word for word in words.split() if word not in stop_words]
