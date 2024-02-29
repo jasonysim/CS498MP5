@@ -11,7 +11,7 @@ lines = sc.textFile(sys.argv[1], 1)
 N = 5
 # elements of line will include (word, count) tuples
 # caclulate mean, sum, min, max, variance
-sum_total = lines.map(lambda x: int(x[1])).mean()
+sum_total = lines.values().sum()#.map(lambda x: int(x[1])).mean()
 # ans1 = sum_total//N
 ans2 = sum_total
 # ans3 = lines.map(lambda x: int(x[1])).min()
