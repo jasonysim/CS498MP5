@@ -14,7 +14,7 @@ LOGGER = log4jLogger.LogManager.getLogger(__name__)
 
 def parse_text(line):
     return line.split('\t')
-lines = lines.flatMap(parse_text)
+lines = lines.map(parse_text)
 
 LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
