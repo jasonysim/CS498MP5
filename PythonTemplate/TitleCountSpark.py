@@ -36,6 +36,8 @@ lines = sc.textFile(sys.argv[3], 1)
 log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
 LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+def tokenize_words(line): 
+    return line.lower().split() 
 lines = lines.flatMap(tokenize_words)
 lines = lines.map(lambda x: (x, 1))
 # LOGGER.info(f'{str(type(lines))}')
