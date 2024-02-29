@@ -5,15 +5,8 @@
 import sys
 from pyspark import SparkConf, SparkContext
 
-# stopWordsPath = sys.argv[1]
-# delimitersPath = sys.argv[2]
-import os
-hadoopFilesPath = r"C:\hadoop"
-os.environ["HADOOP_HOME"] = hadoopFilesPath
-os.environ["hadoop.home.dir"] = hadoopFilesPath
-os.environ["PATH"] = os.environ["PATH"] + f";{hadoopFilesPath}\\bin"
-stopWordsPath = os.path.join('C:\\Users\\Jason\\OneDrive\\School\\UIUC\\2024 Spring\\CS498\\CS498MP5\\CS498MP5\\PythonTemplate\\stopwords.txt')
-delimitersPath = os.path.join('C:\\Users\\Jason\\OneDrive\\School\\UIUC\\2024 Spring\\CS498\\CS498MP5\\CS498MP5\\PythonTemplate\\delimiters.txt')
+stopWordsPath = sys.argv[1]
+delimitersPath = sys.argv[2]
 
 stop_words = []
 with open(stopWordsPath) as f:
@@ -37,18 +30,11 @@ conf = SparkConf().setMaster("local").setAppName("TitleCount")
 conf.set("spark.driver.bindAddress", "127.0.0.1")
 sc = SparkContext(conf=conf)
 
-path = os.path.join('C:\\Users\\Jason\\OneDrive\\School\\UIUC\\2024 Spring\\CS498\\CS498MP5\\CS498MP5\\PythonTemplate\\dataset\\titles\\titles-test')
-lines = sc.textFile(path, 1)
+lines = sc.textFile(sys.argv[3], 1)
 
-#TODO: 
-lines = lines.flatMap(tokenize_words)
-lines = lines.map(lambda x: (x, 1))
-lines = lines.reduceByKey(lambda x, y: x + y)
-lines = lines.sortBy(lambda x: x[1], ascending=False)
-lines.take(10   )
+#TODO
 
-
-# outputFile = open(sys.argv[4],"w")
+outputFile = open(sys.argv[4],"w")
 
 #TODO
 #write results to output file. Foramt for each line: (line +"\n")
