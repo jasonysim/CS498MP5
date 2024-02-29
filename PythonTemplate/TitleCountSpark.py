@@ -51,7 +51,7 @@ outputFile = open(sys.argv[4],"w")
 #TODO1
 #write results to output file. Format for each line: (line +"\n")
 for l in lines.take(10):
-    outputFile.write(l + "\n")
+    outputFile.write(str(l) + "\n")
 
 sc.stop()
 
