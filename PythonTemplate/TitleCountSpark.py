@@ -8,6 +8,10 @@ from pyspark import SparkConf, SparkContext
 # stopWordsPath = sys.argv[1]
 # delimitersPath = sys.argv[2]
 import os
+hadoopFilesPath = r"C:\hadoop"
+os.environ["HADOOP_HOME"] = hadoopFilesPath
+os.environ["hadoop.home.dir"] = hadoopFilesPath
+os.environ["PATH"] = os.environ["PATH"] + f";{hadoopFilesPath}\\bin"
 stopWordsPath = os.path.join('C:\\Users\\Jason\\OneDrive\\School\\UIUC\\2024 Spring\\CS498\\CS498MP5\\CS498MP5\\PythonTemplate\\stopwords.txt')
 delimitersPath = os.path.join('C:\\Users\\Jason\\OneDrive\\School\\UIUC\\2024 Spring\\CS498\\CS498MP5\\CS498MP5\\PythonTemplate\\delimiters.txt')
 
@@ -41,7 +45,8 @@ lines = lines.flatMap(tokenize_words)
 lines = lines.map(lambda x: (x, 1))
 lines = lines.reduceByKey(lambda x, y: x + y)
 lines = lines.sortBy(lambda x: x[1], ascending=False)
-print(lines)
+lines.take(10   )
+
 
 # outputFile = open(sys.argv[4],"w")
 
