@@ -33,7 +33,14 @@ sc = SparkContext(conf=conf)
 lines = sc.textFile(sys.argv[3], 1)
 
 #TODO: 
-lines = lines.flatMap(tokenize_words)
+def clean_text(x):
+    try :
+        text = re.search(r"text='(.+)', created=", str(x)).group(1)
+        clean_str = text.translate(str.maketrans('','',punc))
+        return clean_str
+    except:
+        return ""  
+lines = lines.flatMap(lambda x: clean_text(x).split())
 lines = lines.map(lambda x: (x, 1))
 lines = lines.reduceByKey(lambda x, y: x + y)
 lines = lines.sortBy(lambda x: x[1], ascending=False)
