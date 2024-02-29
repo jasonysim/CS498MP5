@@ -9,13 +9,15 @@ sc = SparkContext(conf=conf)
 lines = sc.textFile(sys.argv[1], 1)
 
 N = 5
-
+log4jLogger = sc._jvm.org.apache.log4j
+LOGGER = log4jLogger.LogManager.getLogger(__name__)
 def parse_line(line):
     title, count = line.split('\t')
     return (title, int(count))
 
 lines = lines.flatMap(parse_line)
-sum_total = lines.map(lambda x: int(x[1])).mean()
+sum_total = lines.map(lambda x: x[1]).reduce(lambda x, y: x+y)
+LOGGER.info(f'{str(sum_total)}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
 # elements of line will include (word, count) tuples
 # caclulate mean, sum, min, max, variance
