@@ -33,7 +33,7 @@ sc = SparkContext(conf=conf)
 lines = sc.textFile(sys.argv[3], 1)
 
 #TODO: 
-lines = lines.flatMap(lambda x: x.lower.split(' '))
+lines = lines.flatMap(tokenize_words)
 lines = lines.map(lambda x: (x, 1))
 lines = lines.reduceByKey(lambda x, y: x + y)
 lines = lines.sortBy(lambda x: x[1], ascending=False)
