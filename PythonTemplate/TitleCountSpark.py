@@ -35,11 +35,10 @@ lines = sc.textFile(sys.argv[3], 1)
 #TODO: 
 log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
-LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-LOGGER.info(f'{str(type(lines))}')
-
 lines = lines.flatMap(tokenize_words)
 lines = lines.map(lambda x: (x, 1))
+LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+LOGGER.info(f'{str(type(lines))}')
 lines = lines.reduceByKey(lambda x, y: x + y)
 lines = lines.sortBy(lambda x: x[1], ascending=False)
 
