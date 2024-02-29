@@ -11,7 +11,7 @@ lines = sc.textFile(sys.argv[1], 1)
 log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
 
-N=10
+N=3
 def id_counter(line):
     results = []
     page_id, incoming_links = line.split(': ')
