@@ -20,9 +20,9 @@ def id_counter(line):
     results.extend([(link,1) for link in incoming_links])
     return results
 
-lines = lines.flatMap(id_counter)
+lines = lines.map(id_counter)
+lines = lines.flatMap(lambda l : l)
 # lines = lines.reduceByKey(lambda x, y : x)
-
 LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 output = open(sys.argv[2], "w")
 
