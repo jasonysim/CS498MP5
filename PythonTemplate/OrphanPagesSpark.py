@@ -12,7 +12,7 @@ log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
 
 N=10
-lines = lines.map(lambda line : line.split(': '))
+lines = lines.map(lambda line : (line.split(': ')[0], line.split(': ')[1].split(' ')))
 LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
 output = open(sys.argv[2], "w")
