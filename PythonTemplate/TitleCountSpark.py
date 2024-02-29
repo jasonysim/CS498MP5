@@ -34,7 +34,7 @@ lines = sc.textFile(sys.argv[3], 1)
 
 #TODO
 
-outputFile = open(sys.argv[4],"w")
+# outputFile = open(sys.argv[4],"w")
 
 #TODO
 #write results to output file. Foramt for each line: (line +"\n")
