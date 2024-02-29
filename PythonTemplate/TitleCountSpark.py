@@ -42,6 +42,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 logger.debug(lines)
+logger.setLevel(logging.INFO)
+logger.info(lines)
 outputFile = open(sys.argv[4],"w")
 
 #TODO
