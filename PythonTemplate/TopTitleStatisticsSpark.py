@@ -8,7 +8,7 @@ sc = SparkContext(conf=conf)
 
 lines = sc.textFile(sys.argv[1], 1)
 
-N = 5
+N = 10
 log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
 
@@ -36,4 +36,3 @@ outputFile.write('Max\t%s\n' % ans4)
 outputFile.write('Var\t%s\n' % ans5)
 
 sc.stop()
-

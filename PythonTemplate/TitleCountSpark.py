@@ -33,7 +33,7 @@ sc = SparkContext(conf=conf)
 lines = sc.textFile(sys.argv[3], 1)
 
 #TODO: 
-N = 5
+N = 10
 log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
 

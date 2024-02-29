@@ -8,7 +8,12 @@ sc = SparkContext(conf=conf)
 
 lines = sc.textFile(sys.argv[1], 1) 
 
-#TODO
+log4jLogger = sc._jvm.org.apache.log4j
+LOGGER = log4jLogger.LogManager.getLogger(__name__)
+
+N=10
+lines = lines.map(lambda line : line.split(': '))
+LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
 output = open(sys.argv[2], "w")
 
