@@ -12,7 +12,7 @@ N = 5
 log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
 
-lines = lines.map(lambda line : line.split('\t')[1])
+lines = lines.map(lambda line : int(line.split('\t')[1]))
 ans2  = lines.sum() 
 
 LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
