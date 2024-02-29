@@ -35,7 +35,7 @@ lines = sc.textFile(sys.argv[3], 1)
 #TODO: 
 log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
-LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+
 def tokenize_words(line): 
     return line.lower().split() 
 lines = lines.flatMap(tokenize_words)
@@ -48,9 +48,9 @@ lines = lines.sortBy(lambda x: x[1], ascending=False)
 
 outputFile = open(sys.argv[4],"w")
 
-#TODO
+#TODO1
 #write results to output file. Format for each line: (line +"\n")
-for l in lines.collect():
+for l in lines.take(10):
     outputFile.write(l + "\n")
 
 sc.stop()
