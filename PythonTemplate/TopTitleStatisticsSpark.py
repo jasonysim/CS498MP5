@@ -12,7 +12,8 @@ N = 5
 log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
 
-lines = lines.flatMap(lambda l : l.split('\t'))
+
+lines = lines.flatMap(lambda l : l.split('\t')[1])
 
 LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
