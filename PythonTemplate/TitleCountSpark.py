@@ -48,8 +48,10 @@ outputFile = open(sys.argv[4],"w")
 #TODO1
 #write results to output file. Format for each line: (line +"\n")
 LOGGER.info(f'{str(type(lines))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-for line in lines.toLocalIterator():
+def write_to_file(line):
     outputFile.write(str(line) + "\n")
+
+lines.foreach(write_to_file)
 
 sc.stop()
 
