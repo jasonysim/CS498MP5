@@ -47,6 +47,7 @@ outputFile = open(sys.argv[4],"w")
 
 #TODO1
 #write results to output file. Format for each line: (line +"\n")
+LOGGER.info(f'{str(type(lines))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 for line in lines.toLocalIterator():
     outputFile.write(str(line) + "\n")
 
