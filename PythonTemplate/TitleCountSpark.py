@@ -40,8 +40,6 @@ def tokenize_words(line):
     return line.lower().split() 
 lines = lines.flatMap(tokenize_words)
 lines = lines.map(lambda x: (x, 1))
-# LOGGER.info(f'{str(type(lines))}')
-# LOGGER.info(f'{str(type(lines.collect()))}')
 lines = lines.reduceByKey(lambda x, y: x + y)
 lines = lines.sortBy(lambda x: x[1], ascending=False)
 
@@ -50,7 +48,7 @@ outputFile = open(sys.argv[4],"w")
 
 #TODO1
 #write results to output file. Format for each line: (line +"\n")
-for l in lines.take(10):
+for l in lines.take(lines.count()):
     outputFile.write(str(l) + "\n")
 
 sc.stop()
