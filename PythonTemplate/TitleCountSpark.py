@@ -47,12 +47,13 @@ outputFile = open(sys.argv[4],"w")
 
 #TODO1
 #write results to output file. Format for each line: (line +"\n")
-LOGGER.info(f'{str(type(lines))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-def write_to_file(line):
-    LOGGER.info(f'{str(lines)}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-    # outputFile.write(str(line) + "\n")
+# LOGGER.info(f'{str(type(lines))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+# def write_to_file(line):
+#     LOGGER.info(f'{str(lines)}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+#     # outputFile.write(str(line) + "\n")
 
-lines.foreach(write_to_file)
+for line in lines.take(10):
+    outputFile.write(str(line) + "\n")
 
 sc.stop()
 
