@@ -24,13 +24,18 @@ conf.set("spark.driver.bindAddress", "127.0.0.1")
 sc = SparkContext(conf=conf)
 
 lines = sc.textFile(sys.argv[3], 1)
-
-#TODO
-print(lines)
+lines = lines.flatMap(lambda x: x.split(' '))
+lines = lines.filter(lambda x: x not in stop_words)
+lines = lines.map(lambda x: (x, 1))
+lines = lines.reduceByKey(lambda x, y: x + y)
+lines = lines.sortBy(lambda x: x[1], ascending=False)
 
 outputFile = open(sys.argv[4],"w")
 
 #TODO
 #write results to output file. Foramt for each line: (line +"\n")
+for line in lines.collect():
+    outputFile.write(line + "\n")
 
+outputFile.close()
 sc.stop()
