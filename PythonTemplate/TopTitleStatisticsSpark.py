@@ -12,22 +12,12 @@ N = 5
 log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
 
-ans1 = lines.map(lambda line : int(line.split('\t')[1])).sum()//N
-ans2 = lines.map(lambda line : int(line.split('\t')[1])).sum()
-ans3 = lines.map(lambda line : int(line.split('\t')[1])).min()
-ans4 = lines.map(lambda line : int(line.split('\t')[1])).max()
- 
-
-LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-
-# elements of line will include (word, count) tuples
-# caclulate mean, sum, min, max, variance
-
-# ans1 = sum_total//N
-# ans2 = sum_total
-# ans3 = lines.map(lambda x: int(x[1])).min()
-# ans4 = lines.map(lambda x: int(x[1])).max()
-# ans5 = lines.map(lambda x: int(x[1])).variance()
+values = lines.map(lambda line : int(line.split('\t')[1]))
+ans2 = values.sum()
+ans1 = ans2.sum()//N
+ans3 = values.min()
+ans4 = values.max()
+ans5 = sum([(x - ans1)**2 for x in values.take(N)])//N
 
 outputFile = open(sys.argv[2], "w")
 '''
@@ -43,7 +33,7 @@ outputFile.write('Mean\t%s\n' % ans1)
 outputFile.write('Sum\t%s\n' % ans2)
 outputFile.write('Min\t%s\n' % ans3)
 outputFile.write('Max\t%s\n' % ans4)
-# outputFile.write('Var\t%s\n' % ans5)
+outputFile.write('Var\t%s\n' % ans5)
 
 sc.stop()
 
