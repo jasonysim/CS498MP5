@@ -45,13 +45,9 @@ outputFile = open(sys.argv[4],"w")
 
 #TODO1
 #write results to output file. Format for each line: (line +"\n")
-# LOGGER.info(f'{str(type(lines))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-# def write_to_file(line):
-#     LOGGER.info(f'{str(lines)}>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-#     # outputFile.write(str(line) + "\n")
 
 for line in lines.take(10):
-    outputFile.write(str(line) + "\n")
+    outputFile.write(f'{line[0]}\t{line[1]}\n')
 
 sc.stop()
 
