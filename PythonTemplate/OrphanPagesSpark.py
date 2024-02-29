@@ -12,7 +12,16 @@ log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
 
 N=10
-lines = lines.map(lambda line : (line.split(': ')[0], line.split(': ')[1].split(' ')))
+def id_counter(line):
+    results = []
+    page_id, incoming_links = line.split(': ')
+    incoming_links = incoming_links.split(' ')
+    results.append((page_id,0))
+    # results.extend([(link,1) for link in incoming_links])
+    return results
+
+
+lines = lines.map(id_counter)
 LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
 output = open(sys.argv[2], "w")
