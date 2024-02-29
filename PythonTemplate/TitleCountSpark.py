@@ -33,17 +33,14 @@ sc = SparkContext(conf=conf)
 lines = sc.textFile(sys.argv[3], 1)
 
 #TODO: 
-lines = lines.flatMap(tokenize_words)
+def tokenize(line): 
+    return line.lower().split() 
+lines = lines.flatMap(tokenize)
 lines = lines.map(lambda x: (x, 1))
 lines = lines.reduceByKey(lambda x, y: x + y)
 lines = lines.sortBy(lambda x: x[1], ascending=False)
-import logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-logger.debug(lines)
-logger.setLevel(logging.INFO)
-logger.info(lines)
+
+
 outputFile = open(sys.argv[4],"w")
 
 #TODO
