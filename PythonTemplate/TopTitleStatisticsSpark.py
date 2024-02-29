@@ -11,12 +11,12 @@ lines = sc.textFile(sys.argv[1], 1)
 N = 5
 # elements of line will include (word, count) tuples
 # caclulate mean, sum, min, max, variance
-sum_total = lines.map(lambda x: x[1]).sum()
+sum_total = lines.map(lambda x: int(x[1])).sum()
 ans1 = sum_total//N
 ans2 = sum_total
-ans3 = lines.map(lambda x: x[1]).min()
-ans4 = lines.map(lambda x: x[1]).max()
-ans5 = lines.map(lambda x: x[1]).variance()
+ans3 = lines.map(lambda x: int(x[1])).min()
+ans4 = lines.map(lambda x: int(x[1])).max()
+ans5 = lines.map(lambda x: int(x[1])).variance()
 
 outputFile = open(sys.argv[2], "w")
 '''
