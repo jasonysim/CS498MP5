@@ -33,16 +33,13 @@ sc = SparkContext(conf=conf)
 lines = sc.textFile(sys.argv[3], 1)
 
 #TODO: 
-import logging
-logger = logging.getLogger("broadcast")
 log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
-LOGGER.info("FUCK YOU>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-logger.info("FUCK YOU>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 lines = lines.flatMap(tokenize_words)
 lines = lines.map(lambda x: (x, 1))
 lines = lines.reduceByKey(lambda x, y: x + y)
 lines = lines.sortBy(lambda x: x[1], ascending=False)
+LOGGER.info(lines.take())
 
 outputFile = open(sys.argv[4],"w")
 
