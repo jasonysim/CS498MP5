@@ -33,6 +33,8 @@ sc = SparkContext(conf=conf)
 lines = sc.textFile(sys.argv[3], 1)
 
 #TODO: 
+import re
+from string import punctuation as punc
 def clean_text(x):
     try :
         text = re.search(r"text='(.+)', created=", str(x)).group(1)
