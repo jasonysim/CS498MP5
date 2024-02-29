@@ -17,10 +17,11 @@ def id_counter(line):
     page_id, incoming_links = line.split(': ')
     incoming_links = incoming_links.split(' ')
     results.append((page_id,0))
-    results.extend([(link,1) for link in incoming_links if page_id != link])
+    results.append([(link,1) for link in incoming_links])
     return results
 
 lines = lines.map(id_counter)
+lines = lines.reduceByKey(lambda x, y : (x[0], x[1] + y[1]))
 
 LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 output = open(sys.argv[2], "w")
