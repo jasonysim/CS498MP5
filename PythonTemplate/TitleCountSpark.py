@@ -39,9 +39,9 @@ LOGGER = log4jLogger.LogManager.getLogger(__name__)
 lines = lines.flatMap(tokenize_words)
 lines = lines.map(lambda word: (word, 1))
 lines = lines.reduceByKey(lambda word, c: word + c)
-lines = lines.sortBy(lambda word: word[1], ascending=False)
+lines = lines.sortBy(lambda wordcount: wordcount[1], ascending=False)
 top_lines = lines.take(10)
-top_lines.sort(key=lambda x: x[0])
+# top_lines.sort(key=lambda x: x[0])
 
 outputFile = open(sys.argv[4],"w")
 for line in top_lines:
