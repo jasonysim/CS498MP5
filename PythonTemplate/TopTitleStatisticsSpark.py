@@ -13,6 +13,7 @@ log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
 
 lines = lines.map(lambda line : line.split('\t')[1])
+ans2  = lines.sum() 
 
 LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
@@ -20,7 +21,7 @@ LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 # caclulate mean, sum, min, max, variance
 
 # ans1 = sum_total//N
-ans2 = sum_total
+# ans2 = sum_total
 # ans3 = lines.map(lambda x: int(x[1])).min()
 # ans4 = lines.map(lambda x: int(x[1])).max()
 # ans5 = lines.map(lambda x: int(x[1])).variance()
