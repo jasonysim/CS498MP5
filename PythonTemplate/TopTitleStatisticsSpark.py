@@ -14,7 +14,7 @@ LOGGER = log4jLogger.LogManager.getLogger(__name__)
 
 values = lines.map(lambda line : int(line.split('\t')[1]))
 ans2 = values.sum()
-ans1 = ans2.sum()//N
+ans1 = ans2//N
 ans3 = values.min()
 ans4 = values.max()
 ans5 = sum([(x - ans1)**2 for x in values.take(N)])//N
