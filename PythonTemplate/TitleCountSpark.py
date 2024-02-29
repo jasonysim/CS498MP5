@@ -36,19 +36,19 @@ lines = sc.textFile(sys.argv[3], 1)
 log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
 LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-try:
-    lines = lines.flatMap(tokenize_words)
-    lines = lines.map(lambda x: (x, 1))
-    lines = lines.reduceByKey(lambda x, y: x + y)
-    lines = lines.sortBy(lambda x: x[1], ascending=False)
-except Exception as e:
-        LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-        LOGGER.info(e)
+
+lines = lines.flatMap(tokenize_words)
+lines = lines.map(lambda x: (x, 1))
+lines = lines.reduceByKey(lambda x, y: x + y)
+lines = lines.sortBy(lambda x: x[1], ascending=False)
 
 
 outputFile = open(sys.argv[4],"w")
 
 #TODO
 #write results to output file. Format for each line: (line +"\n")
+for l in lines.collect():
+    outputFile.write(l + "\n")
 
 sc.stop()
+
