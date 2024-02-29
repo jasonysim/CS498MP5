@@ -17,7 +17,7 @@ def id_counter(line):
     page_id, incoming_links = line.split(': ')
     incoming_links = incoming_links.split(' ')
     results.append((page_id,0))
-    results.append([(link,1) for link in incoming_links])
+    results.extend([(link,1) for link in incoming_links])
     return results
 
 lines = lines.map(id_counter)
