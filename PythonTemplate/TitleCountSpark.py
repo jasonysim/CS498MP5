@@ -42,7 +42,7 @@ outputFile = open(sys.argv[4],"w")
 
 #TODO
 #write results to output file. Foramt for each line: (line +"\n")
-for line in lines.collect():
+for line in lines:
     outputFile.write(line + "\n")
 
 sc.stop()
