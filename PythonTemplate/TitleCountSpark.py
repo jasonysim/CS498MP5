@@ -19,15 +19,21 @@ with open(delimitersPath) as f:
     delimiters = f.readline()
     delimiters = list(delimiters)
 
+def tokenize_words(line):
+    words = line.lower()
+    for delimiter in delimiters:
+        words = ' '.join(words.split(delimiter))
+    words = [word for word in words.split() if word not in stop_words]
+    return words
+
 conf = SparkConf().setMaster("local").setAppName("TitleCount")
 conf.set("spark.driver.bindAddress", "127.0.0.1")
 sc = SparkContext(conf=conf)
 
 lines = sc.textFile(sys.argv[3], 1)
 
-#TODO: Tokenize the words and remove stop words from the lines.
-lines = lines.flatMap(lambda x: x.split(' '))
-lines = lines.filter(lambda x: x not in stop_words)
+#TODO: 
+lines = lines.flatMap(tokenize_words)
 lines = lines.map(lambda x: (x, 1))
 lines = lines.reduceByKey(lambda x, y: x + y)
 lines = lines.sortBy(lambda x: x[1], ascending=False)
@@ -36,7 +42,7 @@ outputFile = open(sys.argv[4],"w")
 
 #TODO
 #write results to output file. Foramt for each line: (line +"\n")
-for (word, count) in lines.collect():
-    outputFile.write(word + "\t" + str(count) + "\n")
+for line in lines.collect():
+    outputFile.write(line + "\n")
 
 sc.stop()
