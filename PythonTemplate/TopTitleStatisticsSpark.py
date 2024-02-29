@@ -16,7 +16,7 @@ def parse_line(line):
     return (title, int(count))
 
 lines = lines.flatMap(parse_line)
-sum_total = lines.map(lambda x: x[1]).reduce(lambda x, y: x+y)
+sum_total = lines.map(lambda x: x).mean()#.reduce(lambda x, y: x+y)
 LOGGER.info(f'{str(sum_total)}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
 # elements of line will include (word, count) tuples
