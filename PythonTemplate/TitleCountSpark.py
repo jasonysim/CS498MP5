@@ -37,14 +37,14 @@ log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
 
 lines = lines.flatMap(tokenize_words)
-lines = lines.map(lambda x: (x, 1))
-lines = lines.reduceByKey(lambda x, y: x + y)
-lines = lines.sortBy(lambda x: x[1], ascending=False)
+lines = lines.map(lambda word: (word, 1))
+lines = lines.reduceByKey(lambda word, c: word + c)
+lines = lines.sortBy(lambda word: word[1], ascending=False)
 top_lines = lines.take(10)
-sorted_top_lines = top_lines.sort(key=lambda x: x[0])
+top_lines.sort(key=lambda x: x[0])
 
 outputFile = open(sys.argv[4],"w")
-for line in sorted_top_lines.take(10):
+for line in top_lines:
     outputFile.write(f'{line[0]}\t{line[1]}\n')
 
 sc.stop()
