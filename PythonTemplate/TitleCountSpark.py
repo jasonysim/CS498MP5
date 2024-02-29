@@ -39,7 +39,7 @@ LOGGER = log4jLogger.LogManager.getLogger(__name__)
 lines = lines.flatMap(tokenize_words)
 lines = lines.map(lambda x: (x, 1))
 lines = lines.reduceByKey(lambda x, y: x + y)
-lines = lines.sortBy(lambda x: (-x[1], x[0]))
+lines = lines.sortBy(lambda x: (x[1], x[0]))
 
 outputFile = open(sys.argv[4],"w")
 
