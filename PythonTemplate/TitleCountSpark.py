@@ -43,7 +43,8 @@ def clean_text(x):
     except:
         return ""  
 lines = lines.flatMap(lambda x: clean_text(x).split())
-lines.take(10)
+for l in lines.collect():
+    print(l)
 lines = lines.map(lambda x: (x, 1))
 lines = lines.reduceByKey(lambda x, y: x + y)
 lines = lines.sortBy(lambda x: x[1], ascending=False)
