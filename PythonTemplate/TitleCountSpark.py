@@ -46,11 +46,9 @@ lines = lines.sortBy(lambda x: (-x[1], x[0]))
 outputFile = open(sys.argv[4],"w")
 
 #TODO1
-def write_to_file(line):
-    outputFile.write(str(line) + "\n")
-
 #write results to output file. Format for each line: (line +"\n")
-lines.foreach(write_to_file)
+for line in lines.toLocalIterator():
+    outputFile.write(str(line) + "\n")
 
 sc.stop()
 
