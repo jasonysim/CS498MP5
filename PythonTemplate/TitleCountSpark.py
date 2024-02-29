@@ -43,11 +43,11 @@ lines = lines.map(lambda x: (x, 1))
 lines = lines.reduceByKey(lambda x, y: x + y)
 lines = lines.sortBy(lambda x: x[1], ascending=False)
 
-
 outputFile = open(sys.argv[4],"w")
 
 #TODO1
 #write results to output file. Format for each line: (line +"\n")
+lines.collect()
 for l in lines.take(lines.count()):
     outputFile.write(str(l) + "\n")
 
