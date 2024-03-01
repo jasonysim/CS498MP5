@@ -31,8 +31,8 @@ leagueIds = sc.textFile(sys.argv[2], 1)
 league = leagueIds.collect()
 lines = lines.filter(lambda x : x[0] in league)
 lines = lines.sortBy(lambda x : x[1], ascending=True)
-# lines = lines.map(lambda x : (x[1], set([x[0]])))
-# lines = lines.reduceByKey(lambda x, y : x.union(y))
+lines = lines.map(lambda x : (x[1], set([x[0]])))
+lines = lines.reduceByKey(lambda x, y : x.union(y))
 
 
 
