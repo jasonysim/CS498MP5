@@ -42,17 +42,15 @@ for line in lines.collect():
         link_levels.append((link, counter))
     counter += len(links)
 
+link_levels = sorted(link_levels, key=lambda x : x[0])
 LOGGER.info(f'{str(link_levels)}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 output = open(sys.argv[3], "w")
 
 #TODO
-# counter = 0
-# for line in lines.collect():
-#     for 
-#     output.write(f'{line[0]}\t{counter}\n')
-#     counter += line[1]
-
 #write results to output file. Foramt for each line: (key + \t + value +"\n")
+for line in link_levels():
+    output.write(f'{line[0]}\t{line[1]}\n')
+
 
 sc.stop()
 
