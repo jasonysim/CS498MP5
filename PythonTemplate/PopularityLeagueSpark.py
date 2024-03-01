@@ -34,15 +34,15 @@ lines = lines.map(lambda x : (x[1], set([x[0]])))
 lines = lines.reduceByKey(lambda x, y : x.union(y))
 lines = lines.sortBy(lambda x : x[0], ascending=True)
 
+counter = 0
+link_levels = []
+for line in lines.collect():
+    count, links = line
+    for link in links:
+        link_levels.append((link, counter))
+    counter += len(links)
 
-
-# lines = lines.map(lambda x : (x[1], x[0]))
-
-
-LOGGER.info(f'{str(lines.collect())}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
-# lines = lines.map(lambda x : (x[1], x[0]))
-# # lines = lines.map(lambda x : (x[0], 0))
-
+LOGGER.info(f'{str(link_levels)}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 output = open(sys.argv[3], "w")
 
 #TODO
