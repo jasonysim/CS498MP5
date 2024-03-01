@@ -31,7 +31,6 @@ output = open(sys.argv[2], "w")
 for lines in lines.collect():
     output.write(f'{lines[0]}\t{lines[1]}\n')
 
-
 output.close()
 sc.stop()
 
