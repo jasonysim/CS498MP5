@@ -48,7 +48,7 @@ output = open(sys.argv[3], "w")
 
 #TODO
 #write results to output file. Foramt for each line: (key + \t + value +"\n")
-for line in link_levels():
+for line in link_levels:
     output.write(f'{line[0]}\t{line[1]}\n')
 
 
