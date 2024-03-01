@@ -22,7 +22,7 @@ def id_counter(line):
 lines = lines.flatMap(id_counter)
 lines = lines.reduceByKey(lambda x, y : x+y)
 lines = lines.filter(lambda x : x[1] == 0)
-lines = lines.sortBy(lambda x : x[0])
+lines = lines.sortBy(lambda x : str(x[0]))
 
 output = open(sys.argv[2], "w")
 
