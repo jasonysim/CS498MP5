@@ -11,7 +11,6 @@ lines = sc.textFile(sys.argv[1], 1)
 log4jLogger = sc._jvm.org.apache.log4j
 LOGGER = log4jLogger.LogManager.getLogger(__name__)
 
-N=100
 def id_counter(line):
     results = []
     page_id, incoming_links = line.split(': ')
@@ -22,14 +21,17 @@ def id_counter(line):
 
 lines = lines.flatMap(id_counter)
 lines = lines.reduceByKey(lambda x, y : x+y)
-# remove where values are not 0
 lines = lines.filter(lambda x : x[1] == 0)
+lines = lines.sortBy(lambda x : x[0])
 
-LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 output = open(sys.argv[2], "w")
 
 #TODO
 #write results to output file. Foramt for each line: (line + "\n")
+for lines in lines.collect():
+    output.write(f'{lines[0]}\t{lines[1]}\n')
 
+
+output.close()
 sc.stop()
 
