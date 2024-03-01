@@ -34,6 +34,8 @@ lines = lines.filter(lambda x : x[0] in league)
 lines = lines.map(lambda x : (x[1], x[0]))
 lines = lines.reduceByKey(lambda x, y : (x,) + (y,))
 lines = lines.sortBy(lambda x : x[0], ascending=False)
+lines = lines.map(lambda x : (x[1], x[0]))
+lines = lines.map(lambda x : (x[0], len(x[0])))
 LOGGER.info(f'{str(lines.collect())}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
 output = open(sys.argv[3], "w")
