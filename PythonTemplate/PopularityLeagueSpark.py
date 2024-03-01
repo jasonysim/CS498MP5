@@ -28,14 +28,13 @@ lines = lines.reduceByKey(lambda x, y : x+y)
 leagueIds = sc.textFile(sys.argv[2], 1)
 
 #TODO
-
 league = leagueIds.collect()
 lines = lines.filter(lambda x : x[0] in league)
 lines = lines.map(lambda x : (x[1], x[0]))
 lines = lines.reduceByKey(lambda x, y : [x] + [y])
 lines = lines.map(lambda x : (x[1], x[0]))
 lines = lines.sortBy(lambda x : x[0], ascending=True)
-lines = lines.map(lambda x : x[0]).zipWithIndex()
+
 
 LOGGER.info(f'{str(lines.collect())}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 # lines = lines.map(lambda x : (x[1], x[0]))
@@ -45,9 +44,9 @@ output = open(sys.argv[3], "w")
 
 #TODO
 counter = 0
-for line in lines.collect():
-    output.write(f'{line[0]}\t{counter}\n')
-    counter += 1
+# for line in lines.collect():
+#     output.write(f'{line[0]}\t{counter}\n')
+#     counter += 1
 
 #write results to output file. Foramt for each line: (key + \t + value +"\n")
 
