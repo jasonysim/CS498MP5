@@ -22,6 +22,9 @@ def id_counter(line):
 
 lines = lines.flatMap(id_counter)
 lines = lines.reduceByKey(lambda x, y : x+y)
+# remove where values are not 0
+lines = lines.filter(lambda x : x[1] == 0)
+
 LOGGER.info(f'{str(lines.take(N))}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 output = open(sys.argv[2], "w")
 
