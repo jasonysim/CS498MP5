@@ -11,9 +11,24 @@ sc = SparkContext(conf=conf)
 lines = sc.textFile(sys.argv[1], 1) 
 
 #TODO
+log4jLogger = sc._jvm.org.apache.log4j
+LOGGER = log4jLogger.LogManager.getLogger(__name__)
+
+def id_counter(line):
+    results = []
+    page_id, incoming_links = line.split(': ')
+    incoming_links = incoming_links.split(' ')
+    results.append((page_id,0))
+    results.extend([(link,1) for link in incoming_links])
+    return results
+
+lines = lines.flatMap(id_counter)
+lines = lines.reduceByKey(lambda x, y : x+y)
 
 leagueIds = sc.textFile(sys.argv[2], 1)
 
+league = leagueIds.collect()
+LOGGER.info(f'{str(league)}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 #TODO
 
 output = open(sys.argv[3], "w")
