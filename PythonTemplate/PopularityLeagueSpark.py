@@ -30,10 +30,14 @@ leagueIds = sc.textFile(sys.argv[2], 1)
 #TODO
 league = leagueIds.collect()
 lines = lines.filter(lambda x : x[0] in league)
-lines = lines.map(lambda x : (x[1], x[0]))
+lines = lines.map(lambda x : (x[1], [x[0]]))
 lines = lines.reduceByKey(lambda x, y : [x] + [y])
-# lines = lines.map(lambda x : (x[1], x[0]))
 # lines = lines.sortBy(lambda x : x[0], ascending=True)
+
+def level_counter(line):
+    return (line[0], line[1], counter)
+
+# lines = lines.map(lambda x : (x[1], x[0]))
 
 
 LOGGER.info(f'{str(lines.collect())}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
