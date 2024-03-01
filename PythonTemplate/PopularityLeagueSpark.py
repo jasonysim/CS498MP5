@@ -27,9 +27,11 @@ lines = lines.reduceByKey(lambda x, y : x+y)
 
 leagueIds = sc.textFile(sys.argv[2], 1)
 
-league = leagueIds.collect()
-LOGGER.info(f'{str(league)}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 #TODO
+
+league = leagueIds.collect()
+lines = lines.filter(lambda x : x[0] in league)
+LOGGER.info(f'{str(lines.collect())}>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
 
 output = open(sys.argv[3], "w")
 
